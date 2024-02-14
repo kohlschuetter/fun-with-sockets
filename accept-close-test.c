@@ -11,8 +11,11 @@
 // - IBM i (tested with PASE): Errno 3417 ("ECLOSED", undefined in PASE) is returned
 // - AIX: error EINTR is returned
 //
+// compile with:
+// cc -lpthread -o accept-close-test accept-close-test.c
+//
 // on IBM i (OS400 PASE), compile with:
-// /QOpenSys/pkgs/bin/gcc-6 -lpthread -D_SIGSET_T  -o accept-test accept-test.c
+// /QOpenSys/pkgs/bin/gcc-6 -lpthread -D_SIGSET_T  -o accept-close-test accept-close-test.c
 
 #include <stdio.h>
 #include <stdlib.h>
