@@ -7,7 +7,8 @@
 //
 // accept(2) behavior on
 // - macOS: error ECONNABORTED is returned
-// - Linux: Keeps hanging there, accept succeeds
+// - Linux: Keeps hanging there, accept succeeds (but kill -STOP/-CONT will stop it)
+// - Linux (with shutdown(2) before close(2)): error EINVAL
 // - IBM i (tested with PASE): Errno 3417 ("ECLOSED", undefined in PASE) is returned
 // - AIX: error EINTR is returned
 //
@@ -46,6 +47,8 @@ void* thread_accept(void *vargp) {
 void* thread_close(void *vargp) {
     sleep(1);
     printf("Closing server socket\n");
+
+    // shutdown(sockFd, SHUT_RD); // or SHUT_RDWR
     close(sockFd);
 
     return NULL;
